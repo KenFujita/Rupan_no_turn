@@ -3,17 +3,35 @@
     <head>
         <title>My first Vue app</title>
         <script src="https://unpkg.com/vue"></script>
+	<style>
+	    .hello {
+		font-size:20pt;
+		font-weight:bold;
+		border:1px solid magenta;
+		padding:5px 10px 0px 10px;
+		margin:10px;
+	    }
+	</style>
     </head>
     <body>
         <h1>Vue.js</h1>
         <div id="app">
-            {{ message }}
+	    <div><hello v-bind:name="name" /></div>
+	    <div><input type="text" v-model="name"></div>
         </div>
+	<!--
         <hr>
         <input type="text" onInput="doAction(event);">
+	-->
 
         <script>
             /* use v attribute */
+	    var hello = Vue.component('hello',
+	    {
+		    props:['name'],
+		    template: '<p class="hello">{{name}}!</p>',
+	    })
+/*
             var data = {
                 message: 'please type'
             };
@@ -21,15 +39,20 @@
 
             myAudio.src = "typewriter.mp3";
             myAudio.load();
-            
+*/
+
             var app = new Vue({
                 el: '#app',
-                data: data
-            })
+		data: {
+		    name:'none'
+		}
+            });
+/*
             function doAction(event){
                 data.message = event.target.value;
                 myAudio.play();
             }
+*/
         </script>
     </body>
 </html>
