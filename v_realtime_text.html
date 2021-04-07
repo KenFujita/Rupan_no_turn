@@ -39,6 +39,7 @@
 		    },
 		    methods:{
 		    	write:function(event) {
+			    myAudio.currentTime = 0;
 			    myAudio.play();
 			    this.word = event.target.value;
 			}
