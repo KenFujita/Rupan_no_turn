@@ -18,10 +18,6 @@
         <div id="app">
 	    <hello />
         </div>
-	<!--
-        <hr>
-        <input type="text" onInput="doAction(event);">
-	-->
 
         <script>
             /* use v attribute */
@@ -46,25 +42,10 @@
 		    },
 		    template: '<div><p class="hello">{{word}}!</p><div><input type="text" v-on:input="write" v-model="word"></div></div>',
 	    });
-/*
-            var data = {
-                message: 'please type'
-            };
-            var myAudio = new Audio('');
-
-            myAudio.src = "typewriter.mp3";
-            myAudio.load();
-*/
 
             var app = new Vue({
                 el: '#app',
             });
-/*
-            function doAction(event){
-                data.message = event.target.value;
-                myAudio.play();
-            }
-*/
         </script>
     </body>
 </html>
