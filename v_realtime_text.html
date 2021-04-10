@@ -39,11 +39,8 @@
 		    },
 		    methods:{
 		    	write:function(event) {
-			    if(['あ','い','う','え','お'].includes(this.word.slice(-1)) ||
-			    	this.word.slice(-1).match(/^[A-Za-z0-9]*$/)){
-			    	keyPush.currentTime = 0;
-			    	keyPush.play();
-			    }
+			    keyPush.currentTime = 0;
+			    keyPush.play();
 			    this.word = event.target.value;
 			},
 			isEnter:function(event) {
