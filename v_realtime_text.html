@@ -35,16 +35,22 @@
 		    data:function(){
 			return {
 			    word:'',
+			    composing:false,
 			};
 		    },
 		    methods:{
 		    	write:function(event) {
-			    keyPush.currentTime = 0;
-			    keyPush.play();
+			    if(event.inputType == undefined || event.inputType === "deleteContentBackward"){
+				return;
+			    } else {
+			    	keyPush.currentTime = 0;
+			    	keyPush.play();
+			    }
 			    this.word = event.target.value;
 			},
 			isEnter:function(event) {
-			    if(!this.confirmed){
+			    if(!this.composing){
+				enterPush.currentTime = 0.5;
 			        enterPush.play();
 				this.word = '';
 			    }
@@ -55,8 +61,8 @@
 			    	<div>
 			    	    <input type="text" 
 				    	@keydown.enter="isEnter"
-					@compositionstart="confirmed=true"
-					@compositionend="confirmed=false"
+					@compositionstart="composing=true"
+					@compositionend="composing=false"
 				    	v-on:input="write" 
 					v-model="word"
 				    >
