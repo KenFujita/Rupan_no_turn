@@ -21,10 +21,14 @@
 
         <script>
             /* use v attribute */
-	    var myAudio = new Audio('');
+	    var keyPush = new Audio('');
+	    var enterPush = new Audio('');
 
-	    myAudio.src = "typewriter.mp3";
-	    myAudio.load();
+	    keyPush.src = "typewriter.mp3";
+	    keyPush.load();
+
+	    enterPush.src = "rupanIcatch.wav";
+	    enterPush.load();
 
 	    var hello = Vue.component('hello',
 	    {
@@ -35,12 +39,29 @@
 		    },
 		    methods:{
 		    	write:function(event) {
-			    myAudio.currentTime = 0;
-			    myAudio.play();
+			    keyPush.currentTime = 0;
+			    keyPush.play();
 			    this.word = event.target.value;
+			},
+			isEnter:function(event) {
+			    if(this.confirmed){
+			        enterPush.play();
+				this.word = '';
+			    }
 			}
 		    },
-		    template: '<div><p class="hello">{{word}}!</p><div><input type="text" v-on:input="write" v-model="word"></div></div>',
+		    template: `<div>
+			    	<p class="hello">{{word}}!</p>
+			    	<div>
+			    	    <input type="text" 
+				    	@keydown.enter="isEnter"
+					@compositionstart="confirmed=false"
+					@compositionend="confirmed=true"
+				    	v-on:input="write" 
+					v-model="word"
+				    >
+			    	</div>
+			       </div>`,
 	    });
 
             var app = new Vue({
