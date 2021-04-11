@@ -48,12 +48,21 @@
 			    }
 			    this.word = event.target.value;
 			},
-			isEnter:function(event) {
+			isEnter:async function(event) {
 			    if(!this.composing){
 				enterPush.currentTime = 0.5;
 			        enterPush.play();
-				this.word = '';
+				const res = await this.donotWrite(enterPush);
+				this.word = res;
+				console.log(res);
 			    }
+			},
+			donotWrite:function(aud) {
+				return new Promise((resolve) => {
+			    	    aud.addEventListener('ended',(event)=>{
+		    			resolve('done');
+			    	    });
+				});
 			}
 		    },
 		    template: `<div>
@@ -73,6 +82,7 @@
             var app = new Vue({
                 el: '#app',
             });
+
         </script>
     </body>
 </html>
