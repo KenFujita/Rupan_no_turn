@@ -18,53 +18,75 @@
         <div id="app">
 	    <hello />
         </div>
-	<!--
-        <hr>
-        <input type="text" onInput="doAction(event);">
-	-->
 
         <script>
             /* use v attribute */
-	    var myAudio = new Audio('');
+	    var keyPush = new Audio('');
+	    var enterPush = new Audio('');
 
-	    myAudio.src = "typewriter.mp3";
-	    myAudio.load();
+	    keyPush.src = "typewriter.mp3";
+	    keyPush.load();
+
+	    enterPush.src = "rupanIcatch.wav";
+	    enterPush.load();
 
 	    var hello = Vue.component('hello',
 	    {
 		    data:function(){
 			return {
 			    word:'',
+			    composing:false,
+			    isDis:false,
 			};
 		    },
 		    methods:{
 		    	write:function(event) {
-			    myAudio.currentTime = 0;
-			    myAudio.play();
+			    if(event.inputType == undefined || event.inputType === "deleteContentBackward"){
+				return;
+			    } else {
+			    	keyPush.currentTime = 0;
+			    	keyPush.play();
+			    }
 			    this.word = event.target.value;
+			},
+			isEnter:async function(event) {
+			    if(!this.composing){
+				this.isDis = true;
+				this.word = '';
+				enterPush.currentTime = 0.5;
+			        enterPush.play();
+				const res = await this.donotWrite(enterPush);
+				console.log(res);
+				this.isDis = false;
+			    }
+			},
+			donotWrite:function(aud) {
+				return new Promise((resolve) => {
+			    	    aud.addEventListener('ended',(event)=>{
+					resolve('done');
+			    	    });
+				});
 			}
 		    },
-		    template: '<div><p class="hello">{{word}}!</p><div><input type="text" v-on:input="write" v-model="word"></div></div>',
+		    template: `<div>
+			    	<p class="hello">{{word}}!</p>
+			    	<div>
+			    	    <input type="text"
+				        v-bind:disabled="isDis"
+				    	@keydown.enter="isEnter"
+					@compositionstart="composing=true"
+					@compositionend="composing=false"
+				    	v-on:input="write" 
+					v-model="word"
+				    >
+			    	</div>
+			       </div>`,
 	    });
-/*
-            var data = {
-                message: 'please type'
-            };
-            var myAudio = new Audio('');
-
-            myAudio.src = "typewriter.mp3";
-            myAudio.load();
-*/
 
             var app = new Vue({
                 el: '#app',
             });
-/*
-            function doAction(event){
-                data.message = event.target.value;
-                myAudio.play();
-            }
-*/
+
         </script>
     </body>
 </html>
