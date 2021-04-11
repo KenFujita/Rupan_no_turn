@@ -36,6 +36,7 @@
 			return {
 			    word:'',
 			    composing:false,
+			    isDis:false,
 			};
 		    },
 		    methods:{
@@ -50,17 +51,19 @@
 			},
 			isEnter:async function(event) {
 			    if(!this.composing){
+				this.isDis = true;
+				this.word = '';
 				enterPush.currentTime = 0.5;
 			        enterPush.play();
 				const res = await this.donotWrite(enterPush);
-				this.word = res;
 				console.log(res);
+				this.isDis = false;
 			    }
 			},
 			donotWrite:function(aud) {
 				return new Promise((resolve) => {
 			    	    aud.addEventListener('ended',(event)=>{
-		    			resolve('done');
+					resolve('done');
 			    	    });
 				});
 			}
@@ -68,7 +71,8 @@
 		    template: `<div>
 			    	<p class="hello">{{word}}!</p>
 			    	<div>
-			    	    <input type="text" 
+			    	    <input type="text"
+				        v-bind:disabled="isDis"
 				    	@keydown.enter="isEnter"
 					@compositionstart="composing=true"
 					@compositionend="composing=false"
