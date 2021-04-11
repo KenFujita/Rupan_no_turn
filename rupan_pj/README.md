@@ -1,24 +1,13 @@
-# rupan_pj
+# Rupan_no_turn
+## 概要
+- 「ルパンのタイプライターのアレ」をwebで実現したい
+- vue.jsでやれるところまで
 
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## 現状
+- 文字をtextのinputに入力する時に音は鳴る（音源は各々ローカルで指定してくだちい）
+- 音が鳴り終わるまで次の音を鳴らせない。
+  - 例えば`helloworld`を素早く打っても、「ダダダダダダ」ではなく「ダッ...ダッ...ダッ」のように連続で鳴らない
+  - 非同期で音を鳴らせばいけそうかも
+- 最後の「タッタラターンダダッダダッダダッダダッダッダッダン!」の処理ができてない。
+  - `Enter`が入力された時に鳴らす処理を追加する
+- デザインをそれっぽくする
