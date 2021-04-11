@@ -15,31 +15,34 @@
 </template>
 
 <script>
-    var keyPush = new Audio('');
-    var enterPush = new Audio('');
-
-    keyPush.src = "../typewriter.mp3";
-    keyPush.load();
-
-    enterPush.src = "../rupanIcatch.wav";
-    enterPush.load();
 
 export default {
   name: 'HelloWorld',
   data:function(){
 	return {
+		keyPushpath:require("@/assets/typewriter.mp3"),
+		enterPushpath:require("@/assets/rupanIcatch.wav"),
+		keyPush:new Audio(''),
+		enterPush:new Audio(''),
 		word:'',
 		composing:false,
 		isDis:false,
 	};
+  },
+  mounted: function(){
+    this.keyPush.src = this.keyPushpath;
+    this.keyPush.load();
+
+    this.enterPush.src = this.enterPushpath;
+    this.enterPush.load();
   },
   methods:{
 	write:function(event) {
 		if(event.inputType == undefined || event.inputType === "deleteContentBackward"){
 			return;
 		} else {
-			keyPush.currentTime = 0;
-			keyPush.play();
+			this.keyPush.currentTime = 0;
+			this.keyPush.play();
 		}
 		this.word = event.target.value;
 	},
@@ -47,9 +50,9 @@ export default {
 		if(!this.composing){
 			this.isDis = true;
 			this.word = '';
-			enterPush.currentTime = 0.5;
-			enterPush.play();
-			const res = await this.donotWrite(enterPush);
+			this.enterPush.currentTime = 0.5;
+			this.enterPush.play();
+			const res = await this.donotWrite(this.enterPush);
 			console.log(res);
 			this.isDis = false;
 		}
