@@ -1,6 +1,6 @@
 <template>
-	<div>
-		<p class="hello">{{word}}!</p>
+	<div class="haichi">
+		<h2 class="description">ルパンのアレを再現するページ</h2>
 		<div>
 			<input type="text"
 			v-bind:disabled="isDis"
@@ -10,7 +10,9 @@
 			v-on:input="write" 
 			v-model="word"
 			>
+			<p style="color: white">サブタイっぽいのを入力してみよう！</p>
 		</div>
+		<textarea readonly class="hello" v-bind:class="{zoomin: isZoom}" v-model="word"></textarea>
 	</div>
 </template>
 
@@ -27,6 +29,7 @@ export default {
 		word:'',
 		composing:false,
 		isDis:false,
+		isZoom:false
 	};
   },
   mounted: function(){
@@ -48,13 +51,13 @@ export default {
 	},
 	isEnter:async function() {
 		if(!this.composing){
-			this.isDis = true;
-			this.word = '';
+			this.isDis = this.isZoom = true;
 			this.enterPush.currentTime = 0.5;
 			this.enterPush.play();
 			const res = await this.donotWrite(this.enterPush);
 			console.log(res);
-			this.isDis = false;
+			this.isDis = this.isZoom = false;
+			this.word = '';
 		}
 	},
 	donotWrite:function(aud) {
@@ -70,11 +73,44 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.haichi {
+	width: 100%
+}
+
 .hello {
-	font-size:20pt;
+	color:#ffffff;
+	background-color: black;
+	font-size:128pt;
 	font-weight:bold;
-	border:1px solid magenta;
-	padding:5px 10px 0px 10px;
-	margin:10px;
+	text-align: center;
+	border: none;
+	box-sizing: border-box;
+	padding:10px 10px 10px 10px;
+	margin: 10px 0px 10px 0px;
+	width: 100%;
+	height: calc(1.2em * 3);
+	line-height: 1.2;
+}
+
+.description {
+	width: 480px;
+	margin: 0 auto;
+	color: red;
+	text-align: center;
+}
+
+.zoomin {
+	animation: zoomIn 0.8s cubic-bezier(0.25, 1, 0.5, 1) 1 forwards;
+}
+ 
+@keyframes zoomIn {
+	0% {
+		transform: scale(0.8);
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
 }
 </style>
