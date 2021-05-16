@@ -1,6 +1,6 @@
 <template>
-	<div>
-		<p class="hello">{{word}}!</p>
+	<div class="haichi">
+		<h2 class="description">ルパンのアレを再現するページ</h2>
 		<div>
 			<input type="text"
 			v-bind:disabled="isDis"
@@ -11,6 +11,7 @@
 			v-model="word"
 			>
 		</div>
+		<textarea readonly class="hello" v-model="word"></textarea>
 	</div>
 </template>
 
@@ -70,12 +71,28 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.haichi {
+	width: 100%
+}
+
 .hello {
 	color:#ffffff;
-	font-size:20pt;
+	background-color: black;
+	font-size:128pt;
 	font-weight:bold;
-	border:1px solid magenta;
-	padding:5px 10px 0px 10px;
-	margin:10px;
+	border: 1px solid darkcyan;
+	box-sizing: border-box;
+	padding:10px 10px 10px 10px;
+	margin: 10px 0px 10px 0px;
+	width: 100%;
+	height: calc(1.2em * 3);
+	line-height: 1.2;
+}
+
+.description {
+	width: 480px;
+	margin: 0 auto;
+	color:#ffffff;
+	text-align: center;
 }
 </style>
