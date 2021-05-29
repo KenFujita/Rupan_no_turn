@@ -10,9 +10,17 @@
 			v-on:input="write" 
 			v-model="word"
 			>
-			<p style="color: white">サブタイっぽいのを入力してみよう！</p>
+			<div style="color: white">サブタイっぽいのを入力してみよう！</div>
 		</div>
+		<div class="hello">
+		<!--
+			<p v-bind:class="{zoomin: isZoom}"> {{ isZoom ? word : word.substr(-1,1) }} </p>
+		-->
+			<p> {{ isZoom ? word : word.substr(-1,1) }} </p>
+		</div>
+		<!--
 		<textarea readonly class="hello" v-bind:class="{zoomin: isZoom}" v-model="word"></textarea>
+		-->
 	</div>
 </template>
 
@@ -100,13 +108,17 @@ export default {
 }
 
 .zoomin {
-	animation: zoomIn 0.8s cubic-bezier(0.25, 1, 0.5, 1) 1 forwards;
+	animation: zoomIn 0.5s cubic-bezier(0.25, 1, 0.5, 1) 1 forwards;
 }
  
 @keyframes zoomIn {
 	0% {
-		transform: scale(0.8);
-		opacity: 0;
+		transform: scale(1.0);
+		opacity: 1;
+	}
+	50% {
+		transform: scale(1.05);
+		opacity: 1;
 	}
 	100% {
 		opacity: 1;
