@@ -1,0 +1,26 @@
+.haichi {
+	width: 100%
+}
+
+.hello {
+	color:#ffffff;
+	background-color: black;
+	font-family:"ＭＳ Ｐ明朝", "MS PMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", serif;
+	font-size:128pt;
+	font-weight:bold;
+	text-align: center;
+	border: none;
+	box-sizing: border-box;
+	padding:10px 10px 10px 10px;
+	margin: 10px 0px 10px 0px;
+	width: 100%;
+	height: calc(1.2em * 3);
+	line-height: 1.2;
+}
+
+.description {
+	width: 480px;
+	margin: 0 auto;
+	color: red;
+	text-align: center;
+}

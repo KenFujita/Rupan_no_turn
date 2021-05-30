@@ -10,10 +10,10 @@
 			v-on:input="write" 
 			v-model="word"
 			>
-			<div style="color: white">サブタイっぽいのを入力してみよう！</div>
+			<span style="color: white">←  サブタイっぽいのを入力してみよう！(25文字以内で)</span>
 		</div>
 		<div class="hello">
-			<p> {{ isDis ? word : word.substr(-1,1) }} </p>
+			<span> {{ isDis ? word : word.substr(-1,1) }} </span>
 		</div>
 	</div>
 </template>
@@ -51,7 +51,8 @@ export default {
 		this.word = event.target.value;
 	},
 	isEnter:async function() {
-		if(!this.composing){
+		console.log(this.composing);
+		if(!this.composing || (this.composing && this.word.length > 25)){
 			this.isDis = true;
 			this.enterPush.currentTime = 0.5;
 			this.enterPush.play();
@@ -73,32 +74,4 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-.haichi {
-	width: 100%
-}
-
-.hello {
-	color:#ffffff;
-	background-color: black;
-	font-family:"ＭＳ Ｐ明朝", "MS PMincho", "ヒラギノ明朝 Pro W3", "Hiragino Mincho Pro", serif;
-	font-size:128pt;
-	font-weight:bold;
-	text-align: center;
-	border: none;
-	box-sizing: border-box;
-	padding:10px 10px 10px 10px;
-	margin: 10px 0px 10px 0px;
-	width: 100%;
-	height: calc(1.2em * 3);
-	line-height: 1.2;
-}
-
-.description {
-	width: 480px;
-	margin: 0 auto;
-	color: red;
-	text-align: center;
-}
-
-</style>
+<style src="./rupan.css" scoped></style>
