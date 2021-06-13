@@ -24,8 +24,8 @@ export default {
   name: 'HelloWorld',
   data:function(){
 	return {
-		keyPushpath:require("@/assets/typewriter.mp3"),
-		enterPushpath:require("@/assets/rupanIcatch.wav"),
+		keyPushpath:"https://rpnassets.s3.ap-northeast-1.amazonaws.com/typewriter.mp3",
+		enterPushpath:"https://rpnassets.s3.ap-northeast-1.amazonaws.com/rupansubtitle.wav",
 		keyPush:new Audio(''),
 		enterPush:new Audio(''),
 		word:'',
@@ -54,7 +54,7 @@ export default {
 		console.log(this.composing);
 		if(!this.composing || (this.composing && this.word.length > 25)){
 			this.isDis = true;
-			this.enterPush.currentTime = 0.5;
+			this.enterPush.currentTime = 0;
 			this.enterPush.play();
 			const res = await this.donotWrite(this.enterPush);
 			console.log(res);
