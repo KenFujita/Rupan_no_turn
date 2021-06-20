@@ -10,7 +10,8 @@
 			v-on:input="write" 
 			v-model="word"
 			>
-			<span style="color: white">←  サブタイっぽいのを入力してみよう！(25文字以内で)</span>
+			<span style="color: white">←  サブタイっぽいのを入力してみよう！(25文字以内で)<br></span>
+			<span style="color: white">※ 末尾が全角文字の場合は文字変換を確定させてからEnterキーを押す</span>
 		</div>
 		<div class="hello">
 			<span> {{ isDis ? word : word.substr(-1,1) }} </span>
@@ -21,7 +22,7 @@
 <script>
 
 export default {
-  name: 'HelloWorld',
+  name: 'RupanSubtitle',
   data:function(){
 	return {
 		keyPushpath:"https://rpnassets.s3.ap-northeast-1.amazonaws.com/typewriter.mp3",
